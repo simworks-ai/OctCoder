@@ -1,3 +1,4 @@
+# In gradio_app.py
 import os
 import traceback
 from dotenv import load_dotenv
@@ -30,7 +31,6 @@ class SimulationState(TypedDict, total=False):
     response: str
 
 # --- Build and Compile the LangGraph Pipeline ---
-# This part of your code was already correct.
 graph = StateGraph(SimulationState)
 graph.add_node("chat", chat_agent)
 graph.add_node("interpret", interpret_spec)
@@ -50,51 +50,57 @@ compiled_graph = graph.compile()
 
 def run_simulation(user_input: str, progress=gr.Progress(track_tqdm=True)):
     """
-    Runs the full agentic pipeline on the user's request as a generator,
-    yielding updates to the Gradio UI for a better user experience.
+    Runs the full agentic pipeline, yielding UI updates for a responsive experience.
     """
-    # 1. Immediately clear previous outputs and show the progress bar
+    # 1. Immediately clear previous outputs and show placeholder visibility
     yield {
-        output_text: gr.update(value="", visible=False),
+        results_group: gr.update(visible=True),
+        output_text: gr.update(value="Starting simulation...", visible=True),
         output_image: gr.update(value=None, visible=False)
     }
 
+    final_state = None
     try:
-        # Define the sequence of steps for progress tracking
-        steps = ["Interpreting...", "Generating Code...", "Executing Simulation...", "Summarizing..."]
+        steps = {
+            "interpret": "Interpreting request...",
+            "codegen": "Generating Octave script...",
+            "execute": "Running simulation...",
+            "summarise": "Creating summary..."
+        }
         
-        # Use a generator to stream intermediate results and update progress
-        # Note: LangGraph's .stream() method is perfect for this.
-        # Each agent's output is yielded as it completes.
-        
-        result = None
-        for i, chunk in enumerate(compiled_graph.stream({"user_input": user_input})):
-            # Update progress bar for each step in the graph
-            if i < len(steps):
-                progress(i / len(steps), desc=steps[i])
+        # Stream the graph execution
+        for chunk in compiled_graph.stream({"user_input": user_input}):
+            # The key of the chunk is the name of the node that just finished
+            node_name = list(chunk.keys())[0]
+            if node_name in steps:
+                progress(list(steps.keys()).index(node_name) / len(steps), desc=steps[node_name])
             
-            # The final result is the last chunk yielded
-            result = chunk
+            # The final result is the last chunk yielded from the graph
+            final_state = list(chunk.values())[0]
 
         progress(1.0, desc="Done!")
 
         # Extract final results from the last state of the graph
-        final_state = list(result.values())[0]
         summary = final_state.get("response", "No summary was generated.")
         gif_path = final_state.get("gif", None)
 
-        # 4. Yield the final results, making the components visible
+        # Debugging: Print the gif_path
+        print(f"Debug: gif_path is {gif_path}")
+
+        # Ensure gif_path is valid and the file exists before updating Gradio component
+        display_gif = False
+        if gif_path and os.path.exists(gif_path):
+            display_gif = True
+
+        # 4. Yield the final results
         yield {
             output_text: gr.update(value=summary, visible=True),
-            output_image: gr.update(value=gif_path, visible=bool(gif_path))
+            output_image: gr.update(value=gif_path if display_gif else None, visible=display_gif)
         }
 
     except Exception as e:
-        # 5. In case of any error, format it and display it to the user
-        error_message = f"**An error occurred:**\n\n```\n{str(e)}\n```"
-        print("--- ERROR TRACEBACK ---")
-        traceback.print_exc()
-        print("-----------------------")
+        error_message = f"**An error occurred during the simulation:**\n\n```\n{traceback.format_exc()}\n```"
+        print(f"--- ERROR TRACEBACK ---\n{traceback.format_exc()}\n-----------------------")
         yield {
             output_text: gr.update(value=error_message, visible=True),
             output_image: gr.update(value=None, visible=False)
@@ -102,29 +108,43 @@ def run_simulation(user_input: str, progress=gr.Progress(track_tqdm=True)):
 
 
 # --- Create the Gradio Interface ---
-with gr.Blocks(theme=gr.themes.Soft(), css="footer {display: none !important}") as demo:
-    gr.Markdown("<h1>Octave Simulation Agent</h1>")
+with gr.Blocks(theme=gr.themes.Soft(), css="""
+footer {display: none !important}
+.hero-img {display: flex; justify-content: center; margin: 0 auto 24px auto;}
+.hero-img img {max-width: 550px; height: auto; border-radius: 12px; box-shadow: 0 4px 24px #0001; object-fit: contain;}
+.results-box {border: 2px solid #e0e0e0; border-radius: 16px; padding: 24px; margin-top: 24px; background: #fafbfc; box-shadow: 0 2px 12px #0001;}
+.results-gif {display: flex; justify-content: center; align-items: center;}
+.results-gif img {max-width: 400px; width: 100%; border-radius: 8px;}
+""") as demo:
+    gr.Markdown("# Octave Simulation Agent", elem_id="hero-title", elem_classes="hero-title")
+    # Hero image directly below the title, controlled by CSS for size
+    with gr.Row(elem_classes="hero-img"):
+        gr.Image("public/octcoder.png", show_label=False, container=False)
     gr.Markdown("Enter a natural language request to generate and run a GNU Octave simulation. The agent will interpret your request, write the code, execute it, and provide a summary with an animated GIF if requested.")
-    
     with gr.Row():
         input_box = gr.Textbox(
             label="Your Request",
             placeholder="e.g., Animate a 2 Hz sine wave for 3 seconds and make a GIF",
-            scale=4
+            scale=4,
+            lines=2
         )
         run_button = gr.Button("Run Simulation", variant="primary", scale=1)
-
-    # Output components are hidden initially
-    output_text = gr.Markdown(visible=False)
-    output_image = gr.Image(type="filepath", label="Simulation Output (GIF)", visible=False)
-
-    # Link the button to the function
+    # Results section in a visually distinct box
+    with gr.Group(visible=False, elem_classes="results-box") as results_group:
+        with gr.Row():
+            with gr.Column(scale=1):
+                output_text = gr.Markdown(label="Summary", elem_id="output-summary")
+            with gr.Column(scale=1, elem_classes="results-gif"):
+                output_image = gr.Image(type="filepath", label="Simulation Output (GIF)", interactive=False)
     run_button.click(
         fn=run_simulation,
         inputs=[input_box],
-        outputs=[output_text, output_image]
+        outputs=[results_group, output_text, output_image]
     )
 
-# Launch the app
+# --- CRUCIAL CHANGE FOR SERVING THE GIF ---
+# Launch the app, allowing Gradio to serve files from the 'test_runs' directory.
 if __name__ == "__main__":
-    demo.launch()
+    # Ensure the directory for runs exists
+    os.makedirs("test_runs", exist_ok=True)
+    demo.launch(allowed_paths=["test_runs", "public"])

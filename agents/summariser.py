@@ -34,11 +34,15 @@ def summariser_agent(state: dict) -> dict:
     stdout = state.get("stdout", "")
     stderr = state.get("stderr", "")
     frames = state.get("frames", [])
-    gif = state.get("gif")
+    gif_path_from_executor = state.get("gif") # Renamed for clarity
 
-    # Include the user’s original request for context
+    # Include the user's original request for context
     history = state.get("history", [])
     user_query = history[-1]["user"] if history else ""
+
+    # Calculate boolean for gif production and integer for frames generated
+    gif_produced = bool(gif_path_from_executor and os.path.exists(gif_path_from_executor))
+    frames_generated = len(frames)
 
     # Build context for the prompt
     context = {
@@ -46,8 +50,8 @@ def summariser_agent(state: dict) -> dict:
         "user_query": user_query,
         "stdout": stdout,
         "stderr": stderr,
-        "frames": frames,
-        "gif": gif
+        "frames_generated": frames_generated, # Pass as integer
+        "gif_produced": gif_produced # Pass as boolean
     }
     context_str = json.dumps(context)
 
@@ -62,4 +66,4 @@ def summariser_agent(state: dict) -> dict:
     #     image_md = f"![](data:image/gif;base64,{b64})"
     #     response = response + "\n\n" + image_md
 
-    return {"response": response}
+    return {"response": response, "gif": gif_path_from_executor}

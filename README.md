@@ -101,6 +101,7 @@ To run the Gradio app on your local machine:
 2.  **Install dependencies:**
     ```bash
     pip install -r requirements.txt
+    brew install gnuplot
     ```
 3.  **Set up environment variables:**
     Create a `.env` file in the root directory and add your `GOOGLE_API_KEY`:

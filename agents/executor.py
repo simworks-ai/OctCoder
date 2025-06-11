@@ -1,5 +1,3 @@
-
-
 import os
 import uuid
 from dotenv import load_dotenv
@@ -46,7 +44,11 @@ def executor_agent(state: dict) -> dict:
     gif_path = None
     if want_gif and frames:
         gif_path = os.path.join(run_dir, "output.gif")
-        make_gif(frames, gif_path)
+        try:
+            make_gif(frames, gif_path)
+        except Exception as e:
+            print(f"Error creating GIF: {e}")
+            gif_path = None # Set to None if GIF creation fails
 
     return {
         "stdout": result.get("stdout", ""),

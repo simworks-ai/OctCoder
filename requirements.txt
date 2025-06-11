@@ -1,0 +1,7 @@
+gradio
+python-dotenv
+langgraph
+typing-extensions
+langchain
+langchain-google-genai
+Pillow

@@ -106,8 +106,8 @@ x = sawtooth(2*pi*freq*t); % Signal vector
 
 % --- Animated Frame Generation ---
 figure; % Create a new figure window
-% Use a step in the loop to manage the number of frames
-step = 5;
+% Use a step in the loop to manage the number of frames. Aim for 20-50 frames for efficiency.
+step = max(1, floor(length(t) / 40)); % Adjust step dynamically to target ~40 frames
 for i = 1:step:length(t)
   plot(t(1:i), x(1:i));
   
@@ -122,10 +122,10 @@ for i = 1:step:length(t)
   % Force the plot to draw before saving
   drawnow;
   
-  % Save the current figure as a zero-padded PNG frame
+  % Save the current figure as a zero-padded PNG frame with a lower DPI for faster processing
   frame_index = floor(i/step) + 1;
   frame_filename = sprintf('frame_%03d.png', frame_index);
-  print(gcf, frame_filename, '-dpng', '-r150'); % Save with 150 DPI
+  print(gcf, frame_filename, '-dpng', '-r100'); % Save with 100 DPI
 end
 
 % --- Finalization ---

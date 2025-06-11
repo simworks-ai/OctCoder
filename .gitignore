@@ -1,0 +1,4 @@
+_pycache_/
+*.py[cod]
+.env
+test_runs/
