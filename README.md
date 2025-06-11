@@ -1,3 +1,61 @@
+# OctCoder: Open-source AI Agents for GNU Octave Simulations
+
+## Project Overview
+
+OctCoder is an innovative project that leverages the power of AI agents to streamline the creation and execution of simulations using GNU Octave. It provides a natural language interface, allowing users to describe desired simulations, which are then interpreted, coded, executed, and summarized by a series of interconnected AI agents. The project features a user-friendly Gradio web interface for easy interaction.
+
+## Licensing
+
+OctCoder is available under a dual-license model, designed to meet the needs of both the open-source community and commercial users.
+
+### Community License (AGPL-3.0)
+
+The open-source version of OctCoder is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. This license is for students, hobbyists, researchers, and other open-source projects.
+
+-   **Freedom:** You are free to use, modify, and distribute the software.
+-   **Obligation:** If you modify the software and make it available to others over a network (e.g., as part of a web application), you must also make the modified source code available to them under the same AGPL-3.0 license.
+-   See the [LICENSE](LICENSE) file for the full text.
+
+### Commercial License
+
+For businesses and individuals who cannot comply with the terms of the AGPL-3.0 (e.g., you want to embed OctCoder in a proprietary, closed-source commercial product), we offer a commercial license.
+
+-   **Proprietary Use:** Allows you to integrate OctCoder into your commercial applications without the obligation to open-source your own code.
+-   **Professional Support:** Commercial licenses include access to professional support, maintenance, and updates.
+-   **Peace of Mind:** Ensures you are fully compliant while using OctCoder in a commercial setting.
+
+To purchase a commercial license or for more information, please see our [**Enterprise License Terms**](ENTERPRISE_LICENSE.txt) or contact us at **sales@your-organization.com**.
+
+## Features
+
+*   **Natural Language to Simulation:** Describe your simulation needs in plain English, and OctCoder will handle the rest.
+*   **Intelligent Agentic Pipeline:** A robust LangGraph-powered pipeline orchestrates specialized AI agents for chat, interpretation, code generation, execution, and summarization.
+*   **GNU Octave Integration:** Seamlessly generates and executes `.m` scripts within a GNU Octave environment.
+*   **Visual Output:** Supports generating animated GIFs from simulation results for better understanding.
+*   **Interactive Gradio Interface:** A web-based UI for easy input, real-time progress updates, and display of results.
+*   **Vercel Deployment Ready:** Optimized for easy deployment on Vercel for cloud-based accessibility.
+
+## Project Structure
+
+```bash
+.
+├── agents/ # Contains individual AI agents for the LangGraph pipeline
+│ ├── chat_agent.py # Handles initial user interaction and acknowledgement.
+│ ├── codegen.py # Generates GNU Octave (.m) scripts from interpreted specifications.
+│ ├── executor.py # Executes Octave scripts and captures output (stdout, stderr, frames, GIF).
+│ ├── interpreter.py # Interprets user requests into a structured simulation specification (JSON).
+│ └── summariser.py # Summarizes simulation results and generates a markdown response.
+├── prompts/ # Stores prompt templates for the large language models (LLMs)
+├── tools/ # Utility functions and scripts used by agents (e.g., Octave runner, GIF maker)
+├── gradio_app.py # The main Gradio application interface.
+├── main.py # Command-line interface to run the agentic pipeline.
+├── requirements.txt # Python dependencies for the project.
+├── vercel.json # Vercel deployment configuration.
+├── README.md # Project README file.
+├── LICENSE # The AGPL-3.0 Community License.
+├── ENTERPRISE_LICENSE.txt # The Commercial License terms.
+└── CLA.md # The Contributor License Agreement.
+```
 
 ## How It Works: The Agentic Pipeline
 
