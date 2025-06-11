@@ -26,7 +26,7 @@ For businesses and individuals who cannot comply with the terms of the AGPL-3.0 
 -   **Professional Support:** Commercial licenses include access to professional support, maintenance, and updates.
 -   **Peace of Mind:** Ensures you are fully compliant while using OctCoder in a commercial setting.
 
-To purchase a commercial license or for more information, please see our [**Enterprise License Terms**](ENTERPRISE_LICENSE.txt) or contact us at **sales@your-organization.com**.
+To purchase a commercial license or for more information, please see our [**Enterprise License Terms**](ENTERPRISE_LICENSE.txt) or contact us at **simworks@genesisai.in**.
 
 ## Features
 
@@ -95,7 +95,7 @@ To run the Gradio app on your local machine:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-organization/OctCoder.git
+    git clone https://github.com/simworks-ai/OctCoder.git
     cd OctCoder
     ```
 2.  **Install dependencies:**
@@ -140,7 +140,6 @@ OctCoder is configured for seamless deployment on Vercel. The `vercel.json` file
     Go to your project settings on Vercel, navigate to "Environment Variables," and add `GOOGLE_API_KEY` with your Gemini API key.
 4.  **Deploy:** Vercel will automatically detect the configuration and deploy your Gradio application.
 
-## Installation
 
 ### Prerequisites
 
