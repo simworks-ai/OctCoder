@@ -1,5 +1,7 @@
 # OctCoder: Open-source AI Agents for GNU Octave Simulations
 
+![OctCoder Architecture](public/octcoder.png)
+
 ## Project Overview
 
 OctCoder is an innovative project that leverages the power of AI agents to streamline the creation and execution of simulations using GNU Octave. It provides a natural language interface, allowing users to describe desired simulations, which are then interpreted, coded, executed, and summarized by a series of interconnected AI agents. The project features a user-friendly Gradio web interface for easy interaction.
