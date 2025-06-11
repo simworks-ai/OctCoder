@@ -1,0 +1,59 @@
+OctCoder Enterprise License Agreement
+Version 1.0
+Copyright (c) 2025 SimWorks. All rights reserved.
+
+This Enterprise License Agreement ("Agreement") is a legal agreement between you ("Licensee") and SimWorks ("Licensor") for the software product "OctCoder," which includes computer software and may include associated media, printed materials, and "online" or electronic documentation (collectively, the "Software").
+
+By installing, copying, or otherwise using the Software, you agree to be bound by the terms of this Agreement. If you do not agree to the terms of this Agreement, do not install or use the Software.
+
+This license grants you the right to use the Software in a commercial environment, which is otherwise restricted by the GNU Affero General Public License v3.0 (AGPL-3.0) under which the community version of the Software is distributed.
+
+1. DEFINITIONS
+   a. "Commercial Use" means using the Software for any purpose that is intended for or directed toward commercial advantage or monetary compensation.
+   b. "Internal Business Operations" means use of the Software by Licensee's employees or authorized contractors in the ordinary course of Licensee's business, provided that the Software is not incorporated into a product or service that is distributed or made available to third parties.
+   c. "Derivative Work" means a work based upon one or more preexisting works, such as a translation, modification, or any other form in which a work may be recast, transformed, or adapted.
+
+2. GRANT OF LICENSE
+   Subject to the terms, conditions, and payment of applicable fees, Licensor grants Licensee a non-exclusive, non-transferable, worldwide, perpetual license to:
+   a. Install and use the Software for Internal Business Operations.
+   b. Create and use Derivative Works of the Software for Internal Business Operations.
+   c. Incorporate the Software or Derivative Works into a proprietary, closed-source application ("Licensee's Application") and distribute Licensee's Application to end-users, provided that Licensee's Application does not primarily replicate the functionality of the Software itself.
+
+3. RESTRICTIONS
+   Licensee shall not:
+   a. Redistribute the Software or its source code as a standalone product.
+   b. Use the Software to create a product that competes with the Software.
+   c. Remove or obscure any copyright, trademark, or other proprietary notices from the Software.
+   d. Sublicense, rent, or lease the Software, except as part of the distribution of Licensee's Application as permitted in Section 2.
+
+4. USAGE TIERS AND FEES
+   The license granted is subject to the usage tier purchased by the Licensee. The following tiers are available. Please contact [sales@your-organization.com] for pricing and purchasing.
+
+   a. TEAM TIER
+      - Usage: Up to [10] internal users.
+      - Support: Standard email support (48-hour response time).
+      - Fee: 2000 USD [Monthly]
+
+   b. BUSINESS TIER
+      - Usage: Up to [50] internal users or for use in one (1) commercial application with up to [100,000] monthly active users.
+      - Support: Priority email and chat support (24-hour response time).
+      - Fee: [Contact Sales for Custom Quote]
+
+   c. ENTERPRISE TIER
+      - Usage: Unlimited internal users and unlimited commercial applications.
+      - Support: Dedicated support channel, direct access to engineers, and custom feature development options.
+      - Fee: [Contact Sales for Custom Quote]
+
+5. SUPPORT AND MAINTENANCE
+   Licensor will provide support and maintenance services ("Support") as specified in the purchased usage tier for a period of one (1) year from the date of purchase. Support is renewable annually.
+
+6. TERM AND TERMINATION
+   This Agreement is effective until terminated. Licensee may terminate it at any time by destroying all copies of the Software. This Agreement will terminate automatically if Licensee fails to comply with any of its terms and conditions. Upon termination, Licensee must destroy all copies of the Software.
+
+7. DISCLAIMER OF WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+8. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL LICENSOR BE LIABLE FOR ANY DAMAGES (INCLUDING, WITHOUT LIMITATION, LOST PROFITS, BUSINESS INTERRUPTION, OR LOST INFORMATION) RISING OUT OF THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+For any questions concerning this Agreement, or if you wish to contact Licensor for any reason, please email: 	simworks@genesisai.in.
