@@ -1,36 +1,3 @@
-# OctCoder: Open-source AI Agents for GNU Octave Simulations
-
-## Project Overview
-
-OctCoder is an innovative open-source project that leverages the power of AI agents to streamline the creation and execution of simulations using GNU Octave. It provides a natural language interface, allowing users to describe desired simulations, which are then interpreted, coded, executed, and summarized by a series of interconnected AI agents. The project features a user-friendly Gradio web interface for easy interaction.
-
-## Features
-
-*   **Natural Language to Simulation:** Describe your simulation needs in plain English, and OctCoder will handle the rest.
-*   **Intelligent Agentic Pipeline:** A robust LangGraph-powered pipeline orchestrates specialized AI agents for chat, interpretation, code generation, execution, and summarization.
-*   **GNU Octave Integration:** Seamlessly generates and executes `.m` scripts within a GNU Octave environment.
-*   **Visual Output:** Supports generating animated GIFs from simulation results for better understanding.
-*   **Interactive Gradio Interface:** A web-based UI for easy input, real-time progress updates, and display of results.
-*   **Vercel Deployment Ready:** Optimized for easy deployment on Vercel for cloud-based accessibility.
-
-## Project Structure
-
-```
-.
-├── agents/                 # Contains individual AI agents for the LangGraph pipeline
-│   ├── chat_agent.py       # Handles initial user interaction and acknowledgement.
-│   ├── codegen.py          # Generates GNU Octave (.m) scripts from interpreted specifications.
-│   ├── executor.py         # Executes Octave scripts and captures output (stdout, stderr, frames, GIF).
-│   ├── interpreter.py      # Interprets user requests into a structured simulation specification (JSON).
-│   └── summariser.py       # Summarizes simulation results and generates a markdown response.
-├── prompts/                # Stores prompt templates for the large language models (LLMs)
-├── tools/                  # Utility functions and scripts used by agents (e.g., Octave runner, GIF maker)
-├── gradio_app.py           # The main Gradio application interface.
-├── main.py                 # Command-line interface to run the agentic pipeline.
-├── requirements.txt        # Python dependencies for the project.
-├── vercel.json             # Vercel deployment configuration.
-└── README.md               # Project README file.
-```
 
 ## How It Works: The Agentic Pipeline
 
@@ -68,7 +35,7 @@ To run the Gradio app on your local machine:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/OctCoder.git
+    git clone https://github.com/your-organization/OctCoder.git
     cd OctCoder
     ```
 2.  **Install dependencies:**
@@ -125,7 +92,7 @@ OctCoder is configured for seamless deployment on Vercel. The `vercel.json` file
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/OctCoder.git
+    git clone https://github.com/your-organization/OctCoder.git
     cd OctCoder
     ```
 2.  **Install Python dependencies:**
@@ -151,21 +118,3 @@ You can also run the agentic pipeline directly from the command line:
 ```bash
 python main.py "Animate a 2 Hz sine wave for 3 seconds and make a GIF"
 ```
-Replace the example request with your desired simulation.
-
-## Contributing
-
-We welcome contributions to OctCoder! If you have ideas for improvements, new features, or bug fixes, please feel free to:
-
-1.  Fork the repository.
-2.  Create a new branch (`git checkout -b feature/your-feature-name`).
-3.  Make your changes.
-4.  Commit your changes (`git commit -m 'feat: Add your feature'`).
-5.  Push to the branch (`git push origin feature/your-feature-name`).
-6.  Open a Pull Request.
-
-Please ensure your code adheres to good practices and includes relevant tests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
