@@ -4,29 +4,7 @@
 
 ## Project Overview
 
-OctCoder is an innovative project that leverages the power of AI agents to streamline the creation and execution of simulations using GNU Octave. It provides a natural language interface, allowing users to describe desired simulations, which are then interpreted, coded, executed, and summarized by a series of interconnected AI agents. The project features a user-friendly Gradio web interface for easy interaction.
-
-## Licensing
-
-OctCoder is available under a dual-license model, designed to meet the needs of both the open-source community and commercial users.
-
-### Community License (AGPL-3.0)
-
-The open-source version of OctCoder is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. This license is for students, hobbyists, researchers, and other open-source projects.
-
--   **Freedom:** You are free to use, modify, and distribute the software.
--   **Obligation:** If you modify the software and make it available to others over a network (e.g., as part of a web application), you must also make the modified source code available to them under the same AGPL-3.0 license.
--   See the [LICENSE](LICENSE) file for the full text.
-
-### Commercial License
-
-For businesses and individuals who cannot comply with the terms of the AGPL-3.0 (e.g., you want to embed OctCoder in a proprietary, closed-source commercial product), we offer a commercial license.
-
--   **Proprietary Use:** Allows you to integrate OctCoder into your commercial applications without the obligation to open-source your own code.
--   **Professional Support:** Commercial licenses include access to professional support, maintenance, and updates.
--   **Peace of Mind:** Ensures you are fully compliant while using OctCoder in a commercial setting.
-
-To purchase a commercial license or for more information, please see our [**Enterprise License Terms**](ENTERPRISE_LICENSE.txt) or contact us at **simworks@genesisai.in**.
+OctCoder is an Agentic framework to streamline the creation and execution of simulations using GNU Octave. It provides a natural language interface, allowing users to describe desired simulations, which are then interpreted, coded, executed, and summarized by a series of interconnected AI agents. The project features a user-friendly Gradio web interface for easy interaction.
 
 ## Features
 
@@ -35,7 +13,7 @@ To purchase a commercial license or for more information, please see our [**Ente
 *   **GNU Octave Integration:** Seamlessly generates and executes `.m` scripts within a GNU Octave environment.
 *   **Visual Output:** Supports generating animated GIFs from simulation results for better understanding.
 *   **Interactive Gradio Interface:** A web-based UI for easy input, real-time progress updates, and display of results.
-*   **Vercel Deployment Ready:** Optimized for easy deployment on Vercel for cloud-based accessibility.
+
 
 ## Project Structure
 
@@ -85,12 +63,10 @@ OctCoder utilizes a sophisticated agentic pipeline built with LangGraph to proce
 
 This sequence of agents forms a robust chain, ensuring that each step of the simulation creation and execution process is handled intelligently and efficiently.
 
-## Gradio App
 
-The Gradio application provides an intuitive web interface to interact with the OctCoder agents.
+## Usage
 
-### Running Locally
-
+### Via Gradio Web Interface
 To run the Gradio app on your local machine:
 
 1.  **Clone the repository:**
@@ -115,66 +91,48 @@ To run the Gradio app on your local machine:
     ```
     The application will typically be accessible at `http://127.0.0.1:7860` or similar.
 
-### Deployment on Vercel
-
-OctCoder is configured for seamless deployment on Vercel. The `vercel.json` file in the root directory handles the build and routing configurations.
-
-1.  **Ensure `vercel.json` is present:**
-    ```json
-    {
-      "builds": [
-        {
-          "src": "gradio_app.py",
-          "use": "@vercel/python"
-        }
-      ],
-      "routes": [
-        {
-          "src": "/(.*)",
-          "dest": "gradio_app.py"
-        }
-      ]
-    }
-    ```
-2.  **Connect your Git repository to Vercel.**
-3.  **Add `GOOGLE_API_KEY` as an environment variable in Vercel:**
-    Go to your project settings on Vercel, navigate to "Environment Variables," and add `GOOGLE_API_KEY` with your Gemini API key.
-4.  **Deploy:** Vercel will automatically detect the configuration and deploy your Gradio application.
-
-
-### Prerequisites
-
-*   Python 3.8+
-*   pip
-*   GNU Octave (must be installed and accessible in your system's PATH for the executor agent to function correctly)
-
-### Steps
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-organization/OctCoder.git
-    cd OctCoder
-    ```
-2.  **Install Python dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Set up Google API Key:**
-    Obtain a `GOOGLE_API_KEY` from [Google AI Studio](https://aistudio.google.com/app/apikey) and set it as an environment variable. You can do this by creating a `.env` file in the root of your project:
-    ```
-    GOOGLE_API_KEY="YOUR_GEMINI_API_KEY"
-    ```
-
-## Usage
-
-### Via Gradio Web Interface
-
 Once the Gradio app is running (either locally or deployed on Vercel), simply open the URL in your browser. Enter your simulation request in the provided text box and click "Run Simulation." The results, including a summary and an animated GIF (if requested), will be displayed.
 
-### Via Command Line (main.py)
+### Via Command Line (`cli_app.py`)
 
 You can also run the agentic pipeline directly from the command line:
 
 ```bash
-python main.py "Animate a 2 Hz sine wave for 3 seconds and make a GIF"
+python cli_app.py "Animate a 2 Hz sine wave for 3 seconds and make a GIF"
 ```
+
+Replace `"Animate a 2 Hz sine wave for 3 seconds and make a GIF"` with your desired natural language request. The script will print the simulation's progress, the final summary, and the path to the generated GIF (if successful) directly in your terminal.
+
+## Limitations
+
+OctCoder is prone to suffer from limitations posed by GNU Octave, some common issues are listed below:
+| **Drawback**                | **Impact**                                                          |
+| --------------------------- | ------------------------------------------------------------------- |
+| **Performance**             | Slower execution, especially for loops and large matrix operations  |
+| **Limited functionality**   | Missing toolboxes and MATLAB-specific features                      |
+| **Interface & Debugging**   | Less refined GUI, plotting, and debugging tools                     |
+| **Documentation & support** | Reliance on sparse community resources rather than official support |
+| **Compatibility issues**    | Gaps in syntax, functions, and occasional instability               |
+
+
+## Licensing
+
+OctCoder is available under a dual-license model, designed to meet the needs of both the open-source community and commercial users.
+
+### Community License (AGPL-3.0)
+
+The open-source version of OctCoder is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. This license is for students, hobbyists, researchers, and other open-source projects.
+
+-   **Freedom:** You are free to use, modify, and distribute the software.
+-   **Obligation:** If you modify the software and make it available to others over a network (e.g., as part of a web application), you must also make the modified source code available to them under the same AGPL-3.0 license.
+-   See the [LICENSE](LICENSE) file for the full text.
+
+### Commercial License
+
+For businesses and individuals who cannot comply with the terms of the AGPL-3.0 (e.g., you want to embed OctCoder in a proprietary, closed-source commercial product), we offer a commercial license.
+
+-   **Proprietary Use:** Allows you to integrate OctCoder into your commercial applications without the obligation to open-source your own code.
+-   **Professional Support:** Commercial licenses include access to professional support, maintenance, and updates.
+-   **Peace of Mind:** Ensures you are fully compliant while using OctCoder in a commercial setting.
+
+To purchase a commercial license or for more information, please see our [**Enterprise License Terms**](ENTERPRISE_LICENSE.txt) or contact us at **simworks@genesisai.in**.
